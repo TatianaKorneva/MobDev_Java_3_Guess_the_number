@@ -7,11 +7,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView tvInfo;
     EditText etInput;
     Button bControl;
+    Random random = new Random();
+    TextView right;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +25,46 @@ public class MainActivity extends AppCompatActivity {
         tvInfo = findViewById(R.id.textView);
         etInput = findViewById(R.id.editText);
         bControl = findViewById(R.id.button);
+        right = findViewById(R.id.textView2);
 
     }
 
     public void onClick(View view) {
         int value = Integer.parseInt(etInput.getText().toString());
-        tvInfo.setText(getResources().getString(R.string.ahead));
+
+        int i = random.nextInt(100-0+1);
+        if (value<i)
+        {
+            tvInfo.setText(getResources().getString(R.string.behind));
+            right.setText("Правильный ответ: "+i);
+            etInput.setText("");
+        }
+        if (value==i)
+        {
+            tvInfo.setText(getResources().getString(R.string.hit));
+            right.setText("");
+            etInput.setText("");
+        }
+        if (value>i)
+        {
+            tvInfo.setText(getResources().getString(R.string.ahead));
+            right.setText("Правильный ответ: "+i);
+            etInput.setText("");
+        }
+        if (value>100 | value<1)
+        {
+            etInput.setText("");
+            tvInfo.setText(getResources().getString(R.string.error));
+            right.setText("");
+        }
+
     }
+
+    public void Exit(View view){
+        finish();
+    }
+
+
 }
+
 
