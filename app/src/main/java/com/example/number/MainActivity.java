@@ -30,32 +30,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        int value = Integer.parseInt(etInput.getText().toString());
-
-        int i = random.nextInt(100-0+1);
-        if (value<i)
-        {
-            tvInfo.setText(getResources().getString(R.string.behind));
-            right.setText("Правильный ответ: "+i);
-            etInput.setText("");
-        }
-        if (value==i)
-        {
-            tvInfo.setText(getResources().getString(R.string.hit));
+        if (etInput.getText().toString().length()==0){
+            tvInfo.setText("Вы еще не ввели число!");
             right.setText("");
-            etInput.setText("");
         }
-        if (value>i)
-        {
-            tvInfo.setText(getResources().getString(R.string.ahead));
-            right.setText("Правильный ответ: "+i);
-            etInput.setText("");
-        }
-        if (value>100 | value<1)
-        {
-            etInput.setText("");
-            tvInfo.setText(getResources().getString(R.string.error));
-            right.setText("");
+        else {
+            int value = Integer.parseInt(etInput.getText().toString());
+            int i = random.nextInt(100 - 0 + 1);
+            if (value < i) {
+                tvInfo.setText(getResources().getString(R.string.behind));
+                right.setText("Правильный ответ: " + i);
+                etInput.setText("");
+            }
+            if (value == i) {
+                tvInfo.setText(getResources().getString(R.string.hit));
+                right.setText("");
+                etInput.setText("");
+            }
+            if (value > i) {
+                tvInfo.setText(getResources().getString(R.string.ahead));
+                right.setText("Правильный ответ: " + i);
+                etInput.setText("");
+            }
+            if (value > 100 | value < 1) {
+                etInput.setText("");
+                tvInfo.setText(getResources().getString(R.string.error));
+                right.setText("");
+            }
         }
 
     }
